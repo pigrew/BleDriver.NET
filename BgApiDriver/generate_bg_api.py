@@ -355,7 +355,10 @@ namespace BgApiDriver {
                                     %(struct)s s = new %(struct)s();%(body)s
                                     check(idx, SIZE_HEADER + _length);
                                     %(doCallback)sif (%(call)s != null)
-                                        %(doCallback)s%(call)s(this,s);
+                                        %(doCallback)s%(call)s(this, s);
+                                    %(doCallback)selse
+                                        %(doCallback)slog("UNHANDLED EVENT: %(call)s");
+
                                     res = s;
                                 }
                                 break;''' % { 'type' : (isEvent and 'event') or 'command',
