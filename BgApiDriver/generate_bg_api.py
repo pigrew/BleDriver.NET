@@ -108,18 +108,15 @@ class BgApiCommandEvent(object):
     def dump(self, f):
         in_params = self.dumpInParams()
         f.write('''
-        %(modifier)s %(virtual)s%(return)s %(method_name)s(%(in_params)s)
-        {%(body)s
-        }
+        %(modifier)s %(event)s%(return)s %(method_name)s%(in_params)s%(body)s
 ''' % {
-        'modifier' : (self.isEvent and 'protected') or 'public',
-        'virtual' : (self.isEvent and 'virtual ') or '',
-        'return' : (self.isEvent and 'void') or self.return_struct(),
+        'modifier' : 'public',
+        'event' : (self.isEvent and 'event ') or '',
+        'return' : (self.isEvent and 'EventHandler<ble_msg_%(class)s_%(name)s_evt_t>' % {'class': self.upper.name,'name': self.name}) or self.return_struct(),
         'class' : self.upper.name,
         'name' : self.name,
-        'in_params' : (self.isEvent and '%s arg' % self.struct()) or in_params,
-        'body' : (not self.isEvent and self.dumpBody()) or '''
-            log("%s");''' % self.method_name(),
+        'in_params' : (not self.isEvent and '(%s)' % in_params) or '',
+        'body' : (self.isEvent and ';') or ('\n        {%s\n        }' % self.dumpBody()),
         'cmd' : (self.isEvent and 'evt') or 'cmd',
         'method_name' : self.method_name(),
     })
@@ -334,20 +331,20 @@ namespace BgApiDriver {
         {
             int idx = SIZE_HEADER;
             BgApiEventResponse res = null;
-            int _length = received.Length;
-            byte[] buffer = received.Data;
+            int _length = received.Packet.Length;
+            byte[] buffer = received.Packet.Data;
 ''')
         for isEvent in [True, False]:
             f.write('''
             %(else)sif(%(not)sreceived.IsEvent)
             {
-                switch(received.Class)
+                switch(received.Packet.Class)
                 {''' % { 'else' : (not isEvent and 'else ') or '',
                          'not' : (not isEvent and '!') or '' })
             for cls in self.classes:
                 f.write('''
                     case (byte)ble_classes.ble_cls_%(class)s:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {''' % { 'class' : cls.name })
                 for evtRsp in (isEvent and cls.events) or (not isEvent and cls.commands) or []:
                     if evtRsp.no_return:
@@ -357,7 +354,8 @@ namespace BgApiDriver {
                                 {
                                     %(struct)s s = new %(struct)s();%(body)s
                                     check(idx, SIZE_HEADER + _length);
-                                    %(doCallback)s%(call)s(s);
+                                    %(doCallback)sif (%(call)s != null)
+                                        %(doCallback)s%(call)s(this,s);
                                     res = s;
                                 }
                                 break;''' % { 'type' : (isEvent and 'event') or 'command',
@@ -377,7 +375,7 @@ namespace BgApiDriver {
                 }
             }''')
         f.write('''
-            res.Data = received.Data;
+            res.Packet.Data = received.Packet.Data;
             return res;
         }''')
     def dumpCommandsEnum(self, f):

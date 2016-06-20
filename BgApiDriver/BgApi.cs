@@ -282,7 +282,7 @@ namespace BgApiDriver
                 m_rxOffset -= evtRspBuffer.Length;
                 log(string.Format("m_rxOffset to {0}", m_rxOffset));
 
-                BgApiEventResponse evtRsp = parseEventResponse(new BgApiEventResponse() { Data = evtRspBuffer });
+                BgApiEventResponse evtRsp = parseEventResponse(new BgApiEventResponse(evtRspBuffer));
                 if(evtRsp.IsEvent)
                 {
                     HandleEvent((BgApiEvent)evtRsp);
@@ -358,7 +358,7 @@ namespace BgApiDriver
                 {
                     throw new BgApiException("Response timeout");
                 }
-                log("<-- " + string.Join(" ", m_response.Data.Select(x => x.ToString("X2"))));
+                log("<-- " + string.Join(" ", m_response.Packet.Data.Select(x => x.ToString("X2"))));
                 return m_response;
             }
             catch (Exception e)

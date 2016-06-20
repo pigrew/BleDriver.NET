@@ -3147,194 +3147,89 @@ namespace BgApiDriver {
             public long version;
         }
 
-        protected virtual void ble_evt_system_boot(ble_msg_system_boot_evt_t arg)
-        {
-            log("ble_evt_system_boot");
-        }
+        public event EventHandler<ble_msg_system_boot_evt_t> ble_evt_system_boot;
 
-        protected virtual void ble_evt_system_debug(ble_msg_system_debug_evt_t arg)
-        {
-            log("ble_evt_system_debug");
-        }
+        public event EventHandler<ble_msg_system_debug_evt_t> ble_evt_system_debug;
 
-        protected virtual void ble_evt_system_endpoint_watermark_rx(ble_msg_system_endpoint_watermark_rx_evt_t arg)
-        {
-            log("ble_evt_system_endpoint_watermark_rx");
-        }
+        public event EventHandler<ble_msg_system_endpoint_watermark_rx_evt_t> ble_evt_system_endpoint_watermark_rx;
 
-        protected virtual void ble_evt_system_endpoint_watermark_tx(ble_msg_system_endpoint_watermark_tx_evt_t arg)
-        {
-            log("ble_evt_system_endpoint_watermark_tx");
-        }
+        public event EventHandler<ble_msg_system_endpoint_watermark_tx_evt_t> ble_evt_system_endpoint_watermark_tx;
 
-        protected virtual void ble_evt_system_script_failure(ble_msg_system_script_failure_evt_t arg)
-        {
-            log("ble_evt_system_script_failure");
-        }
+        public event EventHandler<ble_msg_system_script_failure_evt_t> ble_evt_system_script_failure;
 
-        protected virtual void ble_evt_system_no_license_key(ble_msg_system_no_license_key_evt_t arg)
-        {
-            log("ble_evt_system_no_license_key");
-        }
+        public event EventHandler<ble_msg_system_no_license_key_evt_t> ble_evt_system_no_license_key;
 
-        protected virtual void ble_evt_system_protocol_error(ble_msg_system_protocol_error_evt_t arg)
-        {
-            log("ble_evt_system_protocol_error");
-        }
+        public event EventHandler<ble_msg_system_protocol_error_evt_t> ble_evt_system_protocol_error;
 
-        protected virtual void ble_evt_flash_ps_key(ble_msg_flash_ps_key_evt_t arg)
-        {
-            log("ble_evt_flash_ps_key");
-        }
+        public event EventHandler<ble_msg_flash_ps_key_evt_t> ble_evt_flash_ps_key;
 
-        protected virtual void ble_evt_attributes_value(ble_msg_attributes_value_evt_t arg)
-        {
-            log("ble_evt_attributes_value");
-        }
+        public event EventHandler<ble_msg_attributes_value_evt_t> ble_evt_attributes_value;
 
-        protected virtual void ble_evt_attributes_user_read_request(ble_msg_attributes_user_read_request_evt_t arg)
-        {
-            log("ble_evt_attributes_user_read_request");
-        }
+        public event EventHandler<ble_msg_attributes_user_read_request_evt_t> ble_evt_attributes_user_read_request;
 
-        protected virtual void ble_evt_attributes_status(ble_msg_attributes_status_evt_t arg)
-        {
-            log("ble_evt_attributes_status");
-        }
+        public event EventHandler<ble_msg_attributes_status_evt_t> ble_evt_attributes_status;
 
-        protected virtual void ble_evt_connection_status(ble_msg_connection_status_evt_t arg)
-        {
-            log("ble_evt_connection_status");
-        }
+        public event EventHandler<ble_msg_connection_status_evt_t> ble_evt_connection_status;
 
-        protected virtual void ble_evt_connection_version_ind(ble_msg_connection_version_ind_evt_t arg)
-        {
-            log("ble_evt_connection_version_ind");
-        }
+        public event EventHandler<ble_msg_connection_version_ind_evt_t> ble_evt_connection_version_ind;
 
-        protected virtual void ble_evt_connection_feature_ind(ble_msg_connection_feature_ind_evt_t arg)
-        {
-            log("ble_evt_connection_feature_ind");
-        }
+        public event EventHandler<ble_msg_connection_feature_ind_evt_t> ble_evt_connection_feature_ind;
 
-        protected virtual void ble_evt_connection_raw_rx(ble_msg_connection_raw_rx_evt_t arg)
-        {
-            log("ble_evt_connection_raw_rx");
-        }
+        public event EventHandler<ble_msg_connection_raw_rx_evt_t> ble_evt_connection_raw_rx;
 
-        protected virtual void ble_evt_connection_disconnected(ble_msg_connection_disconnected_evt_t arg)
-        {
-            log("ble_evt_connection_disconnected");
-        }
+        public event EventHandler<ble_msg_connection_disconnected_evt_t> ble_evt_connection_disconnected;
 
-        protected virtual void ble_evt_attclient_indicated(ble_msg_attclient_indicated_evt_t arg)
-        {
-            log("ble_evt_attclient_indicated");
-        }
+        public event EventHandler<ble_msg_attclient_indicated_evt_t> ble_evt_attclient_indicated;
 
-        protected virtual void ble_evt_attclient_procedure_completed(ble_msg_attclient_procedure_completed_evt_t arg)
-        {
-            log("ble_evt_attclient_procedure_completed");
-        }
+        public event EventHandler<ble_msg_attclient_procedure_completed_evt_t> ble_evt_attclient_procedure_completed;
 
-        protected virtual void ble_evt_attclient_group_found(ble_msg_attclient_group_found_evt_t arg)
-        {
-            log("ble_evt_attclient_group_found");
-        }
+        public event EventHandler<ble_msg_attclient_group_found_evt_t> ble_evt_attclient_group_found;
 
-        protected virtual void ble_evt_attclient_attribute_found(ble_msg_attclient_attribute_found_evt_t arg)
-        {
-            log("ble_evt_attclient_attribute_found");
-        }
+        public event EventHandler<ble_msg_attclient_attribute_found_evt_t> ble_evt_attclient_attribute_found;
 
-        protected virtual void ble_evt_attclient_find_information_found(ble_msg_attclient_find_information_found_evt_t arg)
-        {
-            log("ble_evt_attclient_find_information_found");
-        }
+        public event EventHandler<ble_msg_attclient_find_information_found_evt_t> ble_evt_attclient_find_information_found;
 
-        protected virtual void ble_evt_attclient_attribute_value(ble_msg_attclient_attribute_value_evt_t arg)
-        {
-            log("ble_evt_attclient_attribute_value");
-        }
+        public event EventHandler<ble_msg_attclient_attribute_value_evt_t> ble_evt_attclient_attribute_value;
 
-        protected virtual void ble_evt_attclient_read_multiple_response(ble_msg_attclient_read_multiple_response_evt_t arg)
-        {
-            log("ble_evt_attclient_read_multiple_response");
-        }
+        public event EventHandler<ble_msg_attclient_read_multiple_response_evt_t> ble_evt_attclient_read_multiple_response;
 
-        protected virtual void ble_evt_sm_smp_data(ble_msg_sm_smp_data_evt_t arg)
-        {
-            log("ble_evt_sm_smp_data");
-        }
+        public event EventHandler<ble_msg_sm_smp_data_evt_t> ble_evt_sm_smp_data;
 
-        protected virtual void ble_evt_sm_bonding_fail(ble_msg_sm_bonding_fail_evt_t arg)
-        {
-            log("ble_evt_sm_bonding_fail");
-        }
+        public event EventHandler<ble_msg_sm_bonding_fail_evt_t> ble_evt_sm_bonding_fail;
 
-        protected virtual void ble_evt_sm_passkey_display(ble_msg_sm_passkey_display_evt_t arg)
-        {
-            log("ble_evt_sm_passkey_display");
-        }
+        public event EventHandler<ble_msg_sm_passkey_display_evt_t> ble_evt_sm_passkey_display;
 
-        protected virtual void ble_evt_sm_passkey_request(ble_msg_sm_passkey_request_evt_t arg)
-        {
-            log("ble_evt_sm_passkey_request");
-        }
+        public event EventHandler<ble_msg_sm_passkey_request_evt_t> ble_evt_sm_passkey_request;
 
-        protected virtual void ble_evt_sm_bond_status(ble_msg_sm_bond_status_evt_t arg)
-        {
-            log("ble_evt_sm_bond_status");
-        }
+        public event EventHandler<ble_msg_sm_bond_status_evt_t> ble_evt_sm_bond_status;
 
-        protected virtual void ble_evt_gap_scan_response(ble_msg_gap_scan_response_evt_t arg)
-        {
-            log("ble_evt_gap_scan_response");
-        }
+        public event EventHandler<ble_msg_gap_scan_response_evt_t> ble_evt_gap_scan_response;
 
-        protected virtual void ble_evt_gap_mode_changed(ble_msg_gap_mode_changed_evt_t arg)
-        {
-            log("ble_evt_gap_mode_changed");
-        }
+        public event EventHandler<ble_msg_gap_mode_changed_evt_t> ble_evt_gap_mode_changed;
 
-        protected virtual void ble_evt_hardware_io_port_status(ble_msg_hardware_io_port_status_evt_t arg)
-        {
-            log("ble_evt_hardware_io_port_status");
-        }
+        public event EventHandler<ble_msg_hardware_io_port_status_evt_t> ble_evt_hardware_io_port_status;
 
-        protected virtual void ble_evt_hardware_soft_timer(ble_msg_hardware_soft_timer_evt_t arg)
-        {
-            log("ble_evt_hardware_soft_timer");
-        }
+        public event EventHandler<ble_msg_hardware_soft_timer_evt_t> ble_evt_hardware_soft_timer;
 
-        protected virtual void ble_evt_hardware_adc_result(ble_msg_hardware_adc_result_evt_t arg)
-        {
-            log("ble_evt_hardware_adc_result");
-        }
+        public event EventHandler<ble_msg_hardware_adc_result_evt_t> ble_evt_hardware_adc_result;
 
-        protected virtual void ble_evt_hardware_analog_comparator_status(ble_msg_hardware_analog_comparator_status_evt_t arg)
-        {
-            log("ble_evt_hardware_analog_comparator_status");
-        }
+        public event EventHandler<ble_msg_hardware_analog_comparator_status_evt_t> ble_evt_hardware_analog_comparator_status;
 
-        protected virtual void ble_evt_dfu_boot(ble_msg_dfu_boot_evt_t arg)
-        {
-            log("ble_evt_dfu_boot");
-        }
+        public event EventHandler<ble_msg_dfu_boot_evt_t> ble_evt_dfu_boot;
 
         protected BgApiEventResponse parseEventResponse(BgApiEventResponse received)
         {
             int idx = SIZE_HEADER;
             BgApiEventResponse res = null;
-            int _length = received.Length;
-            byte[] buffer = received.Data;
+            int _length = received.Packet.Length;
+            byte[] buffer = received.Packet.Data;
 
             if(received.IsEvent)
             {
-                switch(received.Class)
+                switch(received.Packet.Class)
                 {
                     case (byte)ble_classes.ble_cls_system:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_system_boot_id:
                                 {
@@ -3347,7 +3242,8 @@ namespace BgApiDriver {
                                     s.protocol_version = buffer[idx++];
                                     s.hw = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_system_boot(s);
+                                    if (ble_evt_system_boot != null)
+                                        ble_evt_system_boot(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3360,7 +3256,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_system_debug(s);
+                                    if (ble_evt_system_debug != null)
+                                        ble_evt_system_debug(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3370,7 +3267,8 @@ namespace BgApiDriver {
                                     s.endpoint = buffer[idx++];
                                     s.data = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_system_endpoint_watermark_rx(s);
+                                    if (ble_evt_system_endpoint_watermark_rx != null)
+                                        ble_evt_system_endpoint_watermark_rx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3380,7 +3278,8 @@ namespace BgApiDriver {
                                     s.endpoint = buffer[idx++];
                                     s.data = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_system_endpoint_watermark_tx(s);
+                                    if (ble_evt_system_endpoint_watermark_tx != null)
+                                        ble_evt_system_endpoint_watermark_tx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3390,7 +3289,8 @@ namespace BgApiDriver {
                                     s.address = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.reason = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_system_script_failure(s);
+                                    if (ble_evt_system_script_failure != null)
+                                        ble_evt_system_script_failure(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3398,7 +3298,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_system_no_license_key_evt_t s = new ble_msg_system_no_license_key_evt_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_system_no_license_key(s);
+                                    if (ble_evt_system_no_license_key != null)
+                                        ble_evt_system_no_license_key(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3407,7 +3308,8 @@ namespace BgApiDriver {
                                     ble_msg_system_protocol_error_evt_t s = new ble_msg_system_protocol_error_evt_t();
                                     s.reason = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_system_protocol_error(s);
+                                    if (ble_evt_system_protocol_error != null)
+                                        ble_evt_system_protocol_error(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3416,7 +3318,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_flash:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_flash_ps_key_id:
                                 {
@@ -3428,7 +3330,8 @@ namespace BgApiDriver {
                                         s.value[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_flash_ps_key(s);
+                                    if (ble_evt_flash_ps_key != null)
+                                        ble_evt_flash_ps_key(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3437,7 +3340,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_attributes:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_attributes_value_id:
                                 {
@@ -3452,7 +3355,8 @@ namespace BgApiDriver {
                                         s.value[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attributes_value(s);
+                                    if (ble_evt_attributes_value != null)
+                                        ble_evt_attributes_value(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3464,7 +3368,8 @@ namespace BgApiDriver {
                                     s.offset = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.maxsize = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attributes_user_read_request(s);
+                                    if (ble_evt_attributes_user_read_request != null)
+                                        ble_evt_attributes_user_read_request(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3474,7 +3379,8 @@ namespace BgApiDriver {
                                     s.handle = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.flags = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attributes_status(s);
+                                    if (ble_evt_attributes_status != null)
+                                        ble_evt_attributes_status(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3483,7 +3389,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_connection:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_connection_status_id:
                                 {
@@ -3501,7 +3407,8 @@ namespace BgApiDriver {
                                     s.latency = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.bonding = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_connection_status(s);
+                                    if (ble_evt_connection_status != null)
+                                        ble_evt_connection_status(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3513,7 +3420,8 @@ namespace BgApiDriver {
                                     s.comp_id = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.sub_vers_nr = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_connection_version_ind(s);
+                                    if (ble_evt_connection_version_ind != null)
+                                        ble_evt_connection_version_ind(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3527,7 +3435,8 @@ namespace BgApiDriver {
                                         s.features[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_connection_feature_ind(s);
+                                    if (ble_evt_connection_feature_ind != null)
+                                        ble_evt_connection_feature_ind(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3541,7 +3450,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_connection_raw_rx(s);
+                                    if (ble_evt_connection_raw_rx != null)
+                                        ble_evt_connection_raw_rx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3551,7 +3461,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.reason = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_connection_disconnected(s);
+                                    if (ble_evt_connection_disconnected != null)
+                                        ble_evt_connection_disconnected(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3560,7 +3471,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_attclient:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_attclient_indicated_id:
                                 {
@@ -3568,7 +3479,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.attrhandle = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attclient_indicated(s);
+                                    if (ble_evt_attclient_indicated != null)
+                                        ble_evt_attclient_indicated(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3579,7 +3491,8 @@ namespace BgApiDriver {
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.chrhandle = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attclient_procedure_completed(s);
+                                    if (ble_evt_attclient_procedure_completed != null)
+                                        ble_evt_attclient_procedure_completed(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3595,7 +3508,8 @@ namespace BgApiDriver {
                                         s.uuid[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attclient_group_found(s);
+                                    if (ble_evt_attclient_group_found != null)
+                                        ble_evt_attclient_group_found(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3612,7 +3526,8 @@ namespace BgApiDriver {
                                         s.uuid[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attclient_attribute_found(s);
+                                    if (ble_evt_attclient_attribute_found != null)
+                                        ble_evt_attclient_attribute_found(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3627,7 +3542,8 @@ namespace BgApiDriver {
                                         s.uuid[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attclient_find_information_found(s);
+                                    if (ble_evt_attclient_find_information_found != null)
+                                        ble_evt_attclient_find_information_found(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3643,7 +3559,8 @@ namespace BgApiDriver {
                                         s.value[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attclient_attribute_value(s);
+                                    if (ble_evt_attclient_attribute_value != null)
+                                        ble_evt_attclient_attribute_value(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3657,7 +3574,8 @@ namespace BgApiDriver {
                                         s.handles[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_attclient_read_multiple_response(s);
+                                    if (ble_evt_attclient_read_multiple_response != null)
+                                        ble_evt_attclient_read_multiple_response(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3666,7 +3584,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_sm:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_sm_smp_data_id:
                                 {
@@ -3679,7 +3597,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_sm_smp_data(s);
+                                    if (ble_evt_sm_smp_data != null)
+                                        ble_evt_sm_smp_data(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3689,7 +3608,8 @@ namespace BgApiDriver {
                                     s.handle = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_sm_bonding_fail(s);
+                                    if (ble_evt_sm_bonding_fail != null)
+                                        ble_evt_sm_bonding_fail(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3699,7 +3619,8 @@ namespace BgApiDriver {
                                     s.handle = buffer[idx++];
                                     s.passkey = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_sm_passkey_display(s);
+                                    if (ble_evt_sm_passkey_display != null)
+                                        ble_evt_sm_passkey_display(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3708,7 +3629,8 @@ namespace BgApiDriver {
                                     ble_msg_sm_passkey_request_evt_t s = new ble_msg_sm_passkey_request_evt_t();
                                     s.handle = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_sm_passkey_request(s);
+                                    if (ble_evt_sm_passkey_request != null)
+                                        ble_evt_sm_passkey_request(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3720,7 +3642,8 @@ namespace BgApiDriver {
                                     s.mitm = buffer[idx++];
                                     s.keys = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_sm_bond_status(s);
+                                    if (ble_evt_sm_bond_status != null)
+                                        ble_evt_sm_bond_status(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3729,7 +3652,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_gap:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_gap_scan_response_id:
                                 {
@@ -3749,7 +3672,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_gap_scan_response(s);
+                                    if (ble_evt_gap_scan_response != null)
+                                        ble_evt_gap_scan_response(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3759,7 +3683,8 @@ namespace BgApiDriver {
                                     s.discover = buffer[idx++];
                                     s.connect = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_gap_mode_changed(s);
+                                    if (ble_evt_gap_mode_changed != null)
+                                        ble_evt_gap_mode_changed(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3768,7 +3693,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_hardware:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_hardware_io_port_status_id:
                                 {
@@ -3778,7 +3703,8 @@ namespace BgApiDriver {
                                     s.irq = buffer[idx++];
                                     s.state = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_hardware_io_port_status(s);
+                                    if (ble_evt_hardware_io_port_status != null)
+                                        ble_evt_hardware_io_port_status(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3787,7 +3713,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_soft_timer_evt_t s = new ble_msg_hardware_soft_timer_evt_t();
                                     s.handle = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_hardware_soft_timer(s);
+                                    if (ble_evt_hardware_soft_timer != null)
+                                        ble_evt_hardware_soft_timer(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3797,7 +3724,8 @@ namespace BgApiDriver {
                                     s.input = buffer[idx++];
                                     s.value = buffer[idx+0] | (((sbyte)buffer[idx+1]) << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_hardware_adc_result(s);
+                                    if (ble_evt_hardware_adc_result != null)
+                                        ble_evt_hardware_adc_result(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3807,7 +3735,8 @@ namespace BgApiDriver {
                                     s.timestamp = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
                                     s.output = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_hardware_analog_comparator_status(s);
+                                    if (ble_evt_hardware_analog_comparator_status != null)
+                                        ble_evt_hardware_analog_comparator_status(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3816,21 +3745,22 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_test:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             default:
                                 throw new BgApiException(string.Format("Unknown event id 0x{0}", buffer[3].ToString("X2")));
                         }
                         break;
                     case (byte)ble_classes.ble_cls_dfu:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_event_ids.ble_evt_dfu_boot_id:
                                 {
                                     ble_msg_dfu_boot_evt_t s = new ble_msg_dfu_boot_evt_t();
                                     s.version = buffer[idx+0] + buffer[idx+1] * 0x100 + buffer[idx+2] * 0x10000 + buffer[idx+3] * (long)0x1000000; idx += 4;
                                     check(idx, SIZE_HEADER + _length);
-                                    ble_evt_dfu_boot(s);
+                                    if (ble_evt_dfu_boot != null)
+                                        ble_evt_dfu_boot(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3844,16 +3774,17 @@ namespace BgApiDriver {
             }
             else if(!received.IsEvent)
             {
-                switch(received.Class)
+                switch(received.Packet.Class)
                 {
                     case (byte)ble_classes.ble_cls_system:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_system_hello_id:
                                 {
                                     ble_msg_system_hello_rsp_t s = new ble_msg_system_hello_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_hello(s);
+                                    //if (ble_cmd_system_hello != null)
+                                        //ble_cmd_system_hello(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3866,7 +3797,8 @@ namespace BgApiDriver {
                                         s.address.Address[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_address_get(s);
+                                    //if (ble_cmd_system_address_get != null)
+                                        //ble_cmd_system_address_get(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3875,7 +3807,8 @@ namespace BgApiDriver {
                                     ble_msg_system_reg_write_rsp_t s = new ble_msg_system_reg_write_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_reg_write(s);
+                                    //if (ble_cmd_system_reg_write != null)
+                                        //ble_cmd_system_reg_write(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3885,7 +3818,8 @@ namespace BgApiDriver {
                                     s.address = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.value = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_reg_read(s);
+                                    //if (ble_cmd_system_reg_read != null)
+                                        //ble_cmd_system_reg_read(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3898,7 +3832,8 @@ namespace BgApiDriver {
                                     s.rxfail = buffer[idx++];
                                     s.mbuf = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_get_counters(s);
+                                    //if (ble_cmd_system_get_counters != null)
+                                        //ble_cmd_system_get_counters(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3907,7 +3842,8 @@ namespace BgApiDriver {
                                     ble_msg_system_get_connections_rsp_t s = new ble_msg_system_get_connections_rsp_t();
                                     s.maxconn = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_get_connections(s);
+                                    //if (ble_cmd_system_get_connections != null)
+                                        //ble_cmd_system_get_connections(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3921,7 +3857,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_read_memory(s);
+                                    //if (ble_cmd_system_read_memory != null)
+                                        //ble_cmd_system_read_memory(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3936,7 +3873,8 @@ namespace BgApiDriver {
                                     s.protocol_version = buffer[idx++];
                                     s.hw = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_get_info(s);
+                                    //if (ble_cmd_system_get_info != null)
+                                        //ble_cmd_system_get_info(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3945,7 +3883,8 @@ namespace BgApiDriver {
                                     ble_msg_system_endpoint_tx_rsp_t s = new ble_msg_system_endpoint_tx_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_endpoint_tx(s);
+                                    //if (ble_cmd_system_endpoint_tx != null)
+                                        //ble_cmd_system_endpoint_tx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3954,7 +3893,8 @@ namespace BgApiDriver {
                                     ble_msg_system_whitelist_append_rsp_t s = new ble_msg_system_whitelist_append_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_whitelist_append(s);
+                                    //if (ble_cmd_system_whitelist_append != null)
+                                        //ble_cmd_system_whitelist_append(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3963,7 +3903,8 @@ namespace BgApiDriver {
                                     ble_msg_system_whitelist_remove_rsp_t s = new ble_msg_system_whitelist_remove_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_whitelist_remove(s);
+                                    //if (ble_cmd_system_whitelist_remove != null)
+                                        //ble_cmd_system_whitelist_remove(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3971,7 +3912,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_system_whitelist_clear_rsp_t s = new ble_msg_system_whitelist_clear_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_whitelist_clear(s);
+                                    //if (ble_cmd_system_whitelist_clear != null)
+                                        //ble_cmd_system_whitelist_clear(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3985,7 +3927,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_endpoint_rx(s);
+                                    //if (ble_cmd_system_endpoint_rx != null)
+                                        //ble_cmd_system_endpoint_rx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -3994,7 +3937,8 @@ namespace BgApiDriver {
                                     ble_msg_system_endpoint_set_watermarks_rsp_t s = new ble_msg_system_endpoint_set_watermarks_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_endpoint_set_watermarks(s);
+                                    //if (ble_cmd_system_endpoint_set_watermarks != null)
+                                        //ble_cmd_system_endpoint_set_watermarks(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4002,7 +3946,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_system_aes_setkey_rsp_t s = new ble_msg_system_aes_setkey_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_aes_setkey(s);
+                                    //if (ble_cmd_system_aes_setkey != null)
+                                        //ble_cmd_system_aes_setkey(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4015,7 +3960,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_aes_encrypt(s);
+                                    //if (ble_cmd_system_aes_encrypt != null)
+                                        //ble_cmd_system_aes_encrypt(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4028,7 +3974,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_system_aes_decrypt(s);
+                                    //if (ble_cmd_system_aes_decrypt != null)
+                                        //ble_cmd_system_aes_decrypt(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4037,13 +3984,14 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_flash:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_flash_ps_defrag_id:
                                 {
                                     ble_msg_flash_ps_defrag_rsp_t s = new ble_msg_flash_ps_defrag_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_ps_defrag(s);
+                                    //if (ble_cmd_flash_ps_defrag != null)
+                                        //ble_cmd_flash_ps_defrag(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4051,7 +3999,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_flash_ps_dump_rsp_t s = new ble_msg_flash_ps_dump_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_ps_dump(s);
+                                    //if (ble_cmd_flash_ps_dump != null)
+                                        //ble_cmd_flash_ps_dump(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4059,7 +4008,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_flash_ps_erase_all_rsp_t s = new ble_msg_flash_ps_erase_all_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_ps_erase_all(s);
+                                    //if (ble_cmd_flash_ps_erase_all != null)
+                                        //ble_cmd_flash_ps_erase_all(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4068,7 +4018,8 @@ namespace BgApiDriver {
                                     ble_msg_flash_ps_save_rsp_t s = new ble_msg_flash_ps_save_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_ps_save(s);
+                                    //if (ble_cmd_flash_ps_save != null)
+                                        //ble_cmd_flash_ps_save(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4082,7 +4033,8 @@ namespace BgApiDriver {
                                         s.value[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_ps_load(s);
+                                    //if (ble_cmd_flash_ps_load != null)
+                                        //ble_cmd_flash_ps_load(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4090,7 +4042,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_flash_ps_erase_rsp_t s = new ble_msg_flash_ps_erase_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_ps_erase(s);
+                                    //if (ble_cmd_flash_ps_erase != null)
+                                        //ble_cmd_flash_ps_erase(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4099,7 +4052,8 @@ namespace BgApiDriver {
                                     ble_msg_flash_erase_page_rsp_t s = new ble_msg_flash_erase_page_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_erase_page(s);
+                                    //if (ble_cmd_flash_erase_page != null)
+                                        //ble_cmd_flash_erase_page(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4108,7 +4062,8 @@ namespace BgApiDriver {
                                     ble_msg_flash_write_data_rsp_t s = new ble_msg_flash_write_data_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_write_data(s);
+                                    //if (ble_cmd_flash_write_data != null)
+                                        //ble_cmd_flash_write_data(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4121,7 +4076,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_flash_read_data(s);
+                                    //if (ble_cmd_flash_read_data != null)
+                                        //ble_cmd_flash_read_data(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4130,14 +4086,15 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_attributes:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_attributes_write_id:
                                 {
                                     ble_msg_attributes_write_rsp_t s = new ble_msg_attributes_write_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attributes_write(s);
+                                    //if (ble_cmd_attributes_write != null)
+                                        //ble_cmd_attributes_write(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4153,7 +4110,8 @@ namespace BgApiDriver {
                                         s.value[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attributes_read(s);
+                                    //if (ble_cmd_attributes_read != null)
+                                        //ble_cmd_attributes_read(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4168,7 +4126,8 @@ namespace BgApiDriver {
                                         s.value[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attributes_read_type(s);
+                                    //if (ble_cmd_attributes_read_type != null)
+                                        //ble_cmd_attributes_read_type(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4176,7 +4135,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_attributes_user_read_response_rsp_t s = new ble_msg_attributes_user_read_response_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attributes_user_read_response(s);
+                                    //if (ble_cmd_attributes_user_read_response != null)
+                                        //ble_cmd_attributes_user_read_response(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4184,7 +4144,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_attributes_user_write_response_rsp_t s = new ble_msg_attributes_user_write_response_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attributes_user_write_response(s);
+                                    //if (ble_cmd_attributes_user_write_response != null)
+                                        //ble_cmd_attributes_user_write_response(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4193,7 +4154,8 @@ namespace BgApiDriver {
                                     ble_msg_attributes_send_rsp_t s = new ble_msg_attributes_send_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attributes_send(s);
+                                    //if (ble_cmd_attributes_send != null)
+                                        //ble_cmd_attributes_send(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4202,7 +4164,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_connection:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_connection_disconnect_id:
                                 {
@@ -4210,7 +4172,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_disconnect(s);
+                                    //if (ble_cmd_connection_disconnect != null)
+                                        //ble_cmd_connection_disconnect(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4220,7 +4183,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.rssi = (sbyte)buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_get_rssi(s);
+                                    //if (ble_cmd_connection_get_rssi != null)
+                                        //ble_cmd_connection_get_rssi(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4230,7 +4194,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_update(s);
+                                    //if (ble_cmd_connection_update != null)
+                                        //ble_cmd_connection_update(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4240,7 +4205,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_version_update(s);
+                                    //if (ble_cmd_connection_version_update != null)
+                                        //ble_cmd_connection_version_update(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4254,7 +4220,8 @@ namespace BgApiDriver {
                                         s.map[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_channel_map_get(s);
+                                    //if (ble_cmd_connection_channel_map_get != null)
+                                        //ble_cmd_connection_channel_map_get(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4264,7 +4231,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_channel_map_set(s);
+                                    //if (ble_cmd_connection_channel_map_set != null)
+                                        //ble_cmd_connection_channel_map_set(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4274,7 +4242,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_features_get(s);
+                                    //if (ble_cmd_connection_features_get != null)
+                                        //ble_cmd_connection_features_get(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4283,7 +4252,8 @@ namespace BgApiDriver {
                                     ble_msg_connection_get_status_rsp_t s = new ble_msg_connection_get_status_rsp_t();
                                     s.connection = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_get_status(s);
+                                    //if (ble_cmd_connection_get_status != null)
+                                        //ble_cmd_connection_get_status(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4292,7 +4262,8 @@ namespace BgApiDriver {
                                     ble_msg_connection_raw_tx_rsp_t s = new ble_msg_connection_raw_tx_rsp_t();
                                     s.connection = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_raw_tx(s);
+                                    //if (ble_cmd_connection_raw_tx != null)
+                                        //ble_cmd_connection_raw_tx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4301,7 +4272,8 @@ namespace BgApiDriver {
                                     ble_msg_connection_slave_latency_disable_rsp_t s = new ble_msg_connection_slave_latency_disable_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_connection_slave_latency_disable(s);
+                                    //if (ble_cmd_connection_slave_latency_disable != null)
+                                        //ble_cmd_connection_slave_latency_disable(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4310,7 +4282,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_attclient:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_attclient_find_by_type_value_id:
                                 {
@@ -4318,7 +4290,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_find_by_type_value(s);
+                                    //if (ble_cmd_attclient_find_by_type_value != null)
+                                        //ble_cmd_attclient_find_by_type_value(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4328,7 +4301,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_read_by_group_type(s);
+                                    //if (ble_cmd_attclient_read_by_group_type != null)
+                                        //ble_cmd_attclient_read_by_group_type(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4338,7 +4312,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_read_by_type(s);
+                                    //if (ble_cmd_attclient_read_by_type != null)
+                                        //ble_cmd_attclient_read_by_type(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4348,7 +4323,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_find_information(s);
+                                    //if (ble_cmd_attclient_find_information != null)
+                                        //ble_cmd_attclient_find_information(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4358,7 +4334,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_read_by_handle(s);
+                                    //if (ble_cmd_attclient_read_by_handle != null)
+                                        //ble_cmd_attclient_read_by_handle(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4368,7 +4345,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_attribute_write(s);
+                                    //if (ble_cmd_attclient_attribute_write != null)
+                                        //ble_cmd_attclient_attribute_write(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4378,7 +4356,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_write_command(s);
+                                    //if (ble_cmd_attclient_write_command != null)
+                                        //ble_cmd_attclient_write_command(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4387,7 +4366,8 @@ namespace BgApiDriver {
                                     ble_msg_attclient_indicate_confirm_rsp_t s = new ble_msg_attclient_indicate_confirm_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_indicate_confirm(s);
+                                    //if (ble_cmd_attclient_indicate_confirm != null)
+                                        //ble_cmd_attclient_indicate_confirm(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4397,7 +4377,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_read_long(s);
+                                    //if (ble_cmd_attclient_read_long != null)
+                                        //ble_cmd_attclient_read_long(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4407,7 +4388,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_prepare_write(s);
+                                    //if (ble_cmd_attclient_prepare_write != null)
+                                        //ble_cmd_attclient_prepare_write(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4417,7 +4399,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_execute_write(s);
+                                    //if (ble_cmd_attclient_execute_write != null)
+                                        //ble_cmd_attclient_execute_write(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4427,7 +4410,8 @@ namespace BgApiDriver {
                                     s.connection = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_attclient_read_multiple(s);
+                                    //if (ble_cmd_attclient_read_multiple != null)
+                                        //ble_cmd_attclient_read_multiple(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4436,7 +4420,7 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_sm:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_sm_encrypt_start_id:
                                 {
@@ -4444,7 +4428,8 @@ namespace BgApiDriver {
                                     s.handle = buffer[idx++];
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_encrypt_start(s);
+                                    //if (ble_cmd_sm_encrypt_start != null)
+                                        //ble_cmd_sm_encrypt_start(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4452,7 +4437,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_sm_set_bondable_mode_rsp_t s = new ble_msg_sm_set_bondable_mode_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_set_bondable_mode(s);
+                                    //if (ble_cmd_sm_set_bondable_mode != null)
+                                        //ble_cmd_sm_set_bondable_mode(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4461,7 +4447,8 @@ namespace BgApiDriver {
                                     ble_msg_sm_delete_bonding_rsp_t s = new ble_msg_sm_delete_bonding_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_delete_bonding(s);
+                                    //if (ble_cmd_sm_delete_bonding != null)
+                                        //ble_cmd_sm_delete_bonding(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4469,7 +4456,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_sm_set_parameters_rsp_t s = new ble_msg_sm_set_parameters_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_set_parameters(s);
+                                    //if (ble_cmd_sm_set_parameters != null)
+                                        //ble_cmd_sm_set_parameters(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4478,7 +4466,8 @@ namespace BgApiDriver {
                                     ble_msg_sm_passkey_entry_rsp_t s = new ble_msg_sm_passkey_entry_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_passkey_entry(s);
+                                    //if (ble_cmd_sm_passkey_entry != null)
+                                        //ble_cmd_sm_passkey_entry(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4487,7 +4476,8 @@ namespace BgApiDriver {
                                     ble_msg_sm_get_bonds_rsp_t s = new ble_msg_sm_get_bonds_rsp_t();
                                     s.bonds = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_get_bonds(s);
+                                    //if (ble_cmd_sm_get_bonds != null)
+                                        //ble_cmd_sm_get_bonds(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4495,7 +4485,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_sm_set_oob_data_rsp_t s = new ble_msg_sm_set_oob_data_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_set_oob_data(s);
+                                    //if (ble_cmd_sm_set_oob_data != null)
+                                        //ble_cmd_sm_set_oob_data(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4505,7 +4496,8 @@ namespace BgApiDriver {
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.count = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_sm_whitelist_bonds(s);
+                                    //if (ble_cmd_sm_whitelist_bonds != null)
+                                        //ble_cmd_sm_whitelist_bonds(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4514,13 +4506,14 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_gap:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_gap_set_privacy_flags_id:
                                 {
                                     ble_msg_gap_set_privacy_flags_rsp_t s = new ble_msg_gap_set_privacy_flags_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_privacy_flags(s);
+                                    //if (ble_cmd_gap_set_privacy_flags != null)
+                                        //ble_cmd_gap_set_privacy_flags(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4529,7 +4522,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_set_mode_rsp_t s = new ble_msg_gap_set_mode_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_mode(s);
+                                    //if (ble_cmd_gap_set_mode != null)
+                                        //ble_cmd_gap_set_mode(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4538,7 +4532,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_discover_rsp_t s = new ble_msg_gap_discover_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_discover(s);
+                                    //if (ble_cmd_gap_discover != null)
+                                        //ble_cmd_gap_discover(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4548,7 +4543,8 @@ namespace BgApiDriver {
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.connection_handle = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_connect_direct(s);
+                                    //if (ble_cmd_gap_connect_direct != null)
+                                        //ble_cmd_gap_connect_direct(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4557,7 +4553,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_end_procedure_rsp_t s = new ble_msg_gap_end_procedure_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_end_procedure(s);
+                                    //if (ble_cmd_gap_end_procedure != null)
+                                        //ble_cmd_gap_end_procedure(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4567,7 +4564,8 @@ namespace BgApiDriver {
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.connection_handle = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_connect_selective(s);
+                                    //if (ble_cmd_gap_connect_selective != null)
+                                        //ble_cmd_gap_connect_selective(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4576,7 +4574,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_set_filtering_rsp_t s = new ble_msg_gap_set_filtering_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_filtering(s);
+                                    //if (ble_cmd_gap_set_filtering != null)
+                                        //ble_cmd_gap_set_filtering(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4585,7 +4584,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_set_scan_parameters_rsp_t s = new ble_msg_gap_set_scan_parameters_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_scan_parameters(s);
+                                    //if (ble_cmd_gap_set_scan_parameters != null)
+                                        //ble_cmd_gap_set_scan_parameters(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4594,7 +4594,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_set_adv_parameters_rsp_t s = new ble_msg_gap_set_adv_parameters_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_adv_parameters(s);
+                                    //if (ble_cmd_gap_set_adv_parameters != null)
+                                        //ble_cmd_gap_set_adv_parameters(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4603,7 +4604,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_set_adv_data_rsp_t s = new ble_msg_gap_set_adv_data_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_adv_data(s);
+                                    //if (ble_cmd_gap_set_adv_data != null)
+                                        //ble_cmd_gap_set_adv_data(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4612,7 +4614,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_set_directed_connectable_mode_rsp_t s = new ble_msg_gap_set_directed_connectable_mode_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_directed_connectable_mode(s);
+                                    //if (ble_cmd_gap_set_directed_connectable_mode != null)
+                                        //ble_cmd_gap_set_directed_connectable_mode(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4621,7 +4624,8 @@ namespace BgApiDriver {
                                     ble_msg_gap_set_initiating_con_parameters_rsp_t s = new ble_msg_gap_set_initiating_con_parameters_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_gap_set_initiating_con_parameters(s);
+                                    //if (ble_cmd_gap_set_initiating_con_parameters != null)
+                                        //ble_cmd_gap_set_initiating_con_parameters(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4630,14 +4634,15 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_hardware:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_hardware_io_port_config_irq_id:
                                 {
                                     ble_msg_hardware_io_port_config_irq_rsp_t s = new ble_msg_hardware_io_port_config_irq_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_config_irq(s);
+                                    //if (ble_cmd_hardware_io_port_config_irq != null)
+                                        //ble_cmd_hardware_io_port_config_irq(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4646,7 +4651,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_set_soft_timer_rsp_t s = new ble_msg_hardware_set_soft_timer_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_set_soft_timer(s);
+                                    //if (ble_cmd_hardware_set_soft_timer != null)
+                                        //ble_cmd_hardware_set_soft_timer(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4655,7 +4661,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_adc_read_rsp_t s = new ble_msg_hardware_adc_read_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_adc_read(s);
+                                    //if (ble_cmd_hardware_adc_read != null)
+                                        //ble_cmd_hardware_adc_read(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4664,7 +4671,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_io_port_config_direction_rsp_t s = new ble_msg_hardware_io_port_config_direction_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_config_direction(s);
+                                    //if (ble_cmd_hardware_io_port_config_direction != null)
+                                        //ble_cmd_hardware_io_port_config_direction(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4673,7 +4681,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_io_port_config_function_rsp_t s = new ble_msg_hardware_io_port_config_function_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_config_function(s);
+                                    //if (ble_cmd_hardware_io_port_config_function != null)
+                                        //ble_cmd_hardware_io_port_config_function(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4682,7 +4691,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_io_port_config_pull_rsp_t s = new ble_msg_hardware_io_port_config_pull_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_config_pull(s);
+                                    //if (ble_cmd_hardware_io_port_config_pull != null)
+                                        //ble_cmd_hardware_io_port_config_pull(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4691,7 +4701,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_io_port_write_rsp_t s = new ble_msg_hardware_io_port_write_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_write(s);
+                                    //if (ble_cmd_hardware_io_port_write != null)
+                                        //ble_cmd_hardware_io_port_write(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4702,7 +4713,8 @@ namespace BgApiDriver {
                                     s.port = buffer[idx++];
                                     s.data = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_read(s);
+                                    //if (ble_cmd_hardware_io_port_read != null)
+                                        //ble_cmd_hardware_io_port_read(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4711,7 +4723,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_spi_config_rsp_t s = new ble_msg_hardware_spi_config_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_spi_config(s);
+                                    //if (ble_cmd_hardware_spi_config != null)
+                                        //ble_cmd_hardware_spi_config(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4726,7 +4739,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_spi_transfer(s);
+                                    //if (ble_cmd_hardware_spi_transfer != null)
+                                        //ble_cmd_hardware_spi_transfer(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4740,7 +4754,8 @@ namespace BgApiDriver {
                                         s.data[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_i2c_read(s);
+                                    //if (ble_cmd_hardware_i2c_read != null)
+                                        //ble_cmd_hardware_i2c_read(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4749,7 +4764,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_i2c_write_rsp_t s = new ble_msg_hardware_i2c_write_rsp_t();
                                     s.written = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_i2c_write(s);
+                                    //if (ble_cmd_hardware_i2c_write != null)
+                                        //ble_cmd_hardware_i2c_write(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4757,7 +4773,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_hardware_set_txpower_rsp_t s = new ble_msg_hardware_set_txpower_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_set_txpower(s);
+                                    //if (ble_cmd_hardware_set_txpower != null)
+                                        //ble_cmd_hardware_set_txpower(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4766,7 +4783,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_timer_comparator_rsp_t s = new ble_msg_hardware_timer_comparator_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_timer_comparator(s);
+                                    //if (ble_cmd_hardware_timer_comparator != null)
+                                        //ble_cmd_hardware_timer_comparator(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4775,7 +4793,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_io_port_irq_enable_rsp_t s = new ble_msg_hardware_io_port_irq_enable_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_irq_enable(s);
+                                    //if (ble_cmd_hardware_io_port_irq_enable != null)
+                                        //ble_cmd_hardware_io_port_irq_enable(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4784,7 +4803,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_io_port_irq_direction_rsp_t s = new ble_msg_hardware_io_port_irq_direction_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_io_port_irq_direction(s);
+                                    //if (ble_cmd_hardware_io_port_irq_direction != null)
+                                        //ble_cmd_hardware_io_port_irq_direction(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4792,7 +4812,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_hardware_analog_comparator_enable_rsp_t s = new ble_msg_hardware_analog_comparator_enable_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_analog_comparator_enable(s);
+                                    //if (ble_cmd_hardware_analog_comparator_enable != null)
+                                        //ble_cmd_hardware_analog_comparator_enable(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4802,7 +4823,8 @@ namespace BgApiDriver {
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     s.output = buffer[idx++];
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_analog_comparator_read(s);
+                                    //if (ble_cmd_hardware_analog_comparator_read != null)
+                                        //ble_cmd_hardware_analog_comparator_read(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4811,7 +4833,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_analog_comparator_config_irq_rsp_t s = new ble_msg_hardware_analog_comparator_config_irq_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_analog_comparator_config_irq(s);
+                                    //if (ble_cmd_hardware_analog_comparator_config_irq != null)
+                                        //ble_cmd_hardware_analog_comparator_config_irq(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4819,7 +4842,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_hardware_set_rxgain_rsp_t s = new ble_msg_hardware_set_rxgain_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_set_rxgain(s);
+                                    //if (ble_cmd_hardware_set_rxgain != null)
+                                        //ble_cmd_hardware_set_rxgain(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4828,7 +4852,8 @@ namespace BgApiDriver {
                                     ble_msg_hardware_usb_enable_rsp_t s = new ble_msg_hardware_usb_enable_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_hardware_usb_enable(s);
+                                    //if (ble_cmd_hardware_usb_enable != null)
+                                        //ble_cmd_hardware_usb_enable(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4837,13 +4862,14 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_test:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_test_phy_tx_id:
                                 {
                                     ble_msg_test_phy_tx_rsp_t s = new ble_msg_test_phy_tx_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_test_phy_tx(s);
+                                    //if (ble_cmd_test_phy_tx != null)
+                                        //ble_cmd_test_phy_tx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4851,7 +4877,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_test_phy_rx_rsp_t s = new ble_msg_test_phy_rx_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_test_phy_rx(s);
+                                    //if (ble_cmd_test_phy_rx != null)
+                                        //ble_cmd_test_phy_rx(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4860,7 +4887,8 @@ namespace BgApiDriver {
                                     ble_msg_test_phy_end_rsp_t s = new ble_msg_test_phy_end_rsp_t();
                                     s.counter = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_test_phy_end(s);
+                                    //if (ble_cmd_test_phy_end != null)
+                                        //ble_cmd_test_phy_end(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4868,7 +4896,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_test_phy_reset_rsp_t s = new ble_msg_test_phy_reset_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_test_phy_reset(s);
+                                    //if (ble_cmd_test_phy_reset != null)
+                                        //ble_cmd_test_phy_reset(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4881,7 +4910,8 @@ namespace BgApiDriver {
                                         s.channel_map[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_test_get_channel_map(s);
+                                    //if (ble_cmd_test_get_channel_map != null)
+                                        //ble_cmd_test_get_channel_map(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4895,7 +4925,8 @@ namespace BgApiDriver {
                                         s.output[i] = buffer[idx++];
                                     }
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_test_debug(s);
+                                    //if (ble_cmd_test_debug != null)
+                                        //ble_cmd_test_debug(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4903,7 +4934,8 @@ namespace BgApiDriver {
                                 {
                                     ble_msg_test_channel_mode_rsp_t s = new ble_msg_test_channel_mode_rsp_t();
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_test_channel_mode(s);
+                                    //if (ble_cmd_test_channel_mode != null)
+                                        //ble_cmd_test_channel_mode(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4912,14 +4944,15 @@ namespace BgApiDriver {
                         }
                         break;
                     case (byte)ble_classes.ble_cls_dfu:
-                        switch(received.Id)
+                        switch(received.Packet.Id)
                         {
                             case (byte)ble_command_ids.ble_cmd_dfu_flash_set_address_id:
                                 {
                                     ble_msg_dfu_flash_set_address_rsp_t s = new ble_msg_dfu_flash_set_address_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_dfu_flash_set_address(s);
+                                    //if (ble_cmd_dfu_flash_set_address != null)
+                                        //ble_cmd_dfu_flash_set_address(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4928,7 +4961,8 @@ namespace BgApiDriver {
                                     ble_msg_dfu_flash_upload_rsp_t s = new ble_msg_dfu_flash_upload_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_dfu_flash_upload(s);
+                                    //if (ble_cmd_dfu_flash_upload != null)
+                                        //ble_cmd_dfu_flash_upload(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4937,7 +4971,8 @@ namespace BgApiDriver {
                                     ble_msg_dfu_flash_upload_finish_rsp_t s = new ble_msg_dfu_flash_upload_finish_rsp_t();
                                     s.result = buffer[idx+0] | (buffer[idx+1] << 8); idx+=2;
                                     check(idx, SIZE_HEADER + _length);
-                                    //ble_cmd_dfu_flash_upload_finish(s);
+                                    //if (ble_cmd_dfu_flash_upload_finish != null)
+                                        //ble_cmd_dfu_flash_upload_finish(this,s);
                                     res = s;
                                 }
                                 break;
@@ -4949,7 +4984,7 @@ namespace BgApiDriver {
                         throw new BgApiException(string.Format("Unknown class 0x{0}", buffer[2].ToString("X2")));
                 }
             }
-            res.Data = received.Data;
+            res.Packet.Data = received.Packet.Data;
             return res;
         }
     }

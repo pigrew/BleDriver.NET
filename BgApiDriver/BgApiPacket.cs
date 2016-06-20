@@ -39,9 +39,20 @@ namespace BgApiDriver
     /// <summary>
     /// Base class for events and responses.
     /// </summary>
-    public class BgApiEventResponse : BgApiPacket
+    public class BgApiEventResponse : EventArgs
     {
-        public bool IsEvent { get { return (Data[0] & (byte)ble_msg_types.ble_msg_type_evt) == (byte)ble_msg_types.ble_msg_type_evt; } }
+        public BgApiEventResponse() { }
+        /// <summary>
+        /// Construct a new BgApiEventResponse with given packet data
+        /// </summary>
+        /// <param name="data">Packet data</param>
+        public BgApiEventResponse(byte[] data) {
+            Packet.Data = data;
+        }
+
+        public BgApiPacket Packet = new BgApiPacket();
+
+        public bool IsEvent { get { return (Packet.Data[0] & (byte)ble_msg_types.ble_msg_type_evt) == (byte)ble_msg_types.ble_msg_type_evt; } }
 
         /// <summary>
         /// The result of a response or event.
