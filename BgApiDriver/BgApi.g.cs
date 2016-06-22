@@ -191,122 +191,122 @@ namespace BgApiDriver {
 
         public enum system_endpoints
         {
-            system_endpoint_api = 0,
-            system_endpoint_test = 1,
-            system_endpoint_script = 2,
-            system_endpoint_usb = 3,
-            system_endpoint_uart0 = 4,
-            system_endpoint_uart1 = 5,
+            endpoint_api = 0,
+            endpoint_test = 1,
+            endpoint_script = 2,
+            endpoint_usb = 3,
+            endpoint_uart0 = 4,
+            endpoint_uart1 = 5,
         }
 
         public enum attributes_attribute_change_reason
         {
-            attributes_attribute_change_reason_write_request = 0,
-            attributes_attribute_change_reason_write_command = 1,
-            attributes_attribute_change_reason_write_request_user = 2,
+            attribute_change_reason_write_request = 0,
+            attribute_change_reason_write_command = 1,
+            attribute_change_reason_write_request_user = 2,
         }
 
         public enum attributes_attribute_status_flag
         {
-            attributes_attribute_status_flag_notify = 1,
-            attributes_attribute_status_flag_indicate = 2,
+            attribute_status_flag_notify = 1,
+            attribute_status_flag_indicate = 2,
         }
 
         public enum connection_connstatus
         {
-            connection_connected = 1,
-            connection_encrypted = 2,
-            connection_completed = 4,
-            connection_parameters_change = 8,
+            connected = 1,
+            encrypted = 2,
+            completed = 4,
+            parameters_change = 8,
         }
 
         public enum attclient_attribute_value_types
         {
-            attclient_attribute_value_type_read = 0,
-            attclient_attribute_value_type_notify = 1,
-            attclient_attribute_value_type_indicate = 2,
-            attclient_attribute_value_type_read_by_type = 3,
-            attclient_attribute_value_type_read_blob = 4,
-            attclient_attribute_value_type_indicate_rsp_req = 5,
+            attribute_value_type_read = 0,
+            attribute_value_type_notify = 1,
+            attribute_value_type_indicate = 2,
+            attribute_value_type_read_by_type = 3,
+            attribute_value_type_read_blob = 4,
+            attribute_value_type_indicate_rsp_req = 5,
         }
 
         public enum sm_bonding_key
         {
-            sm_bonding_key_ltk = 0x01,
-            sm_bonding_key_addr_public = 0x02,
-            sm_bonding_key_addr_static = 0x04,
-            sm_bonding_key_irk = 0x08,
-            sm_bonding_key_edivrand = 0x10,
-            sm_bonding_key_csrk = 0x20,
-            sm_bonding_key_masterid = 0x40,
+            bonding_key_ltk = 0x01,
+            bonding_key_addr_public = 0x02,
+            bonding_key_addr_static = 0x04,
+            bonding_key_irk = 0x08,
+            bonding_key_edivrand = 0x10,
+            bonding_key_csrk = 0x20,
+            bonding_key_masterid = 0x40,
         }
 
         public enum sm_io_capability
         {
-            sm_io_capability_displayonly = 0,
-            sm_io_capability_displayyesno = 1,
-            sm_io_capability_keyboardonly = 2,
-            sm_io_capability_noinputnooutput = 3,
-            sm_io_capability_keyboarddisplay = 4,
+            io_capability_displayonly = 0,
+            io_capability_displayyesno = 1,
+            io_capability_keyboardonly = 2,
+            io_capability_noinputnooutput = 3,
+            io_capability_keyboarddisplay = 4,
         }
 
         public enum gap_address_type
         {
-            gap_address_type_public = 0,
-            gap_address_type_random = 1,
+            address_type_public = 0,
+            address_type_random = 1,
         }
 
         public enum gap_discoverable_mode
         {
-            gap_non_discoverable = 0,
-            gap_limited_discoverable = 1,
-            gap_general_discoverable = 2,
-            gap_broadcast = 3,
-            gap_user_data = 4,
+            non_discoverable = 0,
+            limited_discoverable = 1,
+            general_discoverable = 2,
+            broadcast = 3,
+            user_data = 4,
         }
 
         public enum gap_connectable_mode
         {
-            gap_non_connectable = 0,
-            gap_directed_connectable = 1,
-            gap_undirected_connectable = 2,
-            gap_scannable_non_connectable = 3,
+            non_connectable = 0,
+            directed_connectable = 1,
+            undirected_connectable = 2,
+            scannable_non_connectable = 3,
         }
 
         public enum gap_discover_mode
         {
-            gap_discover_limited = 0,
-            gap_discover_generic = 1,
-            gap_discover_observation = 2,
+            discover_limited = 0,
+            discover_generic = 1,
+            discover_observation = 2,
         }
 
         public enum gap_ad_types
         {
-            gap_ad_type_none = 0,
-            gap_ad_type_flags = 1,
-            gap_ad_type_services_16bit_more = 2,
-            gap_ad_type_services_16bit_all = 3,
-            gap_ad_type_services_32bit_more = 4,
-            gap_ad_type_services_32bit_all = 5,
-            gap_ad_type_services_128bit_more = 6,
-            gap_ad_type_services_128bit_all = 7,
-            gap_ad_type_localname_short = 8,
-            gap_ad_type_localname_complete = 9,
-            gap_ad_type_txpower = 10,
+            ad_type_none = 0,
+            ad_type_flags = 1,
+            ad_type_services_16bit_more = 2,
+            ad_type_services_16bit_all = 3,
+            ad_type_services_32bit_more = 4,
+            ad_type_services_32bit_all = 5,
+            ad_type_services_128bit_more = 6,
+            ad_type_services_128bit_all = 7,
+            ad_type_localname_short = 8,
+            ad_type_localname_complete = 9,
+            ad_type_txpower = 10,
         }
 
         public enum gap_advertising_policy
         {
-            gap_adv_policy_all = 0,
-            gap_adv_policy_whitelist_scan = 1,
-            gap_adv_policy_whitelist_connect = 2,
-            gap_adv_policy_whitelist_all = 3,
+            adv_policy_all = 0,
+            adv_policy_whitelist_scan = 1,
+            adv_policy_whitelist_connect = 2,
+            adv_policy_whitelist_all = 3,
         }
 
         public enum gap_scan_policy
         {
-            gap_scan_policy_all = 0,
-            gap_scan_policy_whitelist = 1,
+            scan_policy_all = 0,
+            scan_policy_whitelist = 1,
         }
 
         // define gap_scan_header_flags

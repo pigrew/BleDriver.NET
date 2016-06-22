@@ -411,7 +411,7 @@ namespace BgApiDriver {
         {''' % { 'class' : cls.name, 'enum' : enum.name })
                 for value in enum.values:
                     f.write('''
-            %(class)s_%(name)s = %(value)s,''' % { 'class' : cls.name, 'name' : value[0], 'value' : value[1] })
+            %(name)s = %(value)s,''' % { 'class' : cls.name, 'name' : value[0], 'value' : value[1] })
                 f.write('''
         }
 ''')
