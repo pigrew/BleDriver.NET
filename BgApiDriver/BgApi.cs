@@ -65,6 +65,12 @@ namespace BgApiDriver
         /// Holds the response of a previously sent bgapi BgApiCommand.
         /// </summary>
         private BgApiResponse m_response;
+        
+        /// <summary>
+        /// Receive Lock, mostly to prevent multiple threads from simultaneously accessing
+        /// the read buffers.
+        /// </summary>
+        private Object m_receiveLock = new Object();
 
         /// <summary>
         /// The event handler called when new data is received at the serial port.
@@ -186,6 +192,8 @@ namespace BgApiDriver
                 // start with a well known device state
                 ble_cmd_system_reset(0);
                 Close();
+                // The device needs about this long to reset itself.
+                System.Threading.Thread.Sleep(600);
                 doOpen();
 
                 Info = ble_cmd_system_get_info();
@@ -244,51 +252,49 @@ namespace BgApiDriver
 
         private void receive(SerialDataReceivedEventArgs e)
         {
-            log(string.Format("Received: {0}", m_serialPort.BytesToRead));
-            int availableBufferSpace = m_rx.Length - m_rxOffset;
-            int bytesToRead = Math.Min(availableBufferSpace, m_serialPort.BytesToRead);
-            int read = m_stream.Read(m_rx, m_rxOffset, bytesToRead);
-            m_rxOffset += read;
+            // Must loop because two responses could be contained within the same chunk of data
+            while (m_serialPort.BytesToRead > 0 || m_rxOffset > 0) {
+                BgApiEventResponse evtRsp;
+                lock (m_receiveLock) {
+                    // Fill receive buffer with available data
+                    log(string.Format("Received: {0}", m_serialPort.BytesToRead));
+                    int availableBufferSpace = m_rx.Length - m_rxOffset;
+                    int bytesToRead = Math.Min(availableBufferSpace, m_serialPort.BytesToRead);
+                    int read = m_stream.Read(m_rx, m_rxOffset, bytesToRead);
+                    m_rxOffset += read;
+                    
+                    log(string.Format("m_rxOffset: {0}", m_rxOffset));
+                    if (m_rxOffset < SIZE_HEADER) {
+                        // wait for more data
+                        log(string.Format("Waiting for header: {0}", m_rxOffset));
+                        return;
+                    }
 
-            while (true)
-            {
-                log(string.Format("m_rxOffset: {0}", m_rxOffset));
-                if (m_rxOffset < SIZE_HEADER)
-                {
-                    // wait for more data
-                    log(string.Format("Waiting for header: {0}", m_rxOffset));
-                    return;
+                    // read payload
+                    int length = ((m_rx[0] & 0x7F) << 8) | m_rx[1];
+                    log(string.Format("length: {0}", length));
+                    if (m_rxOffset < SIZE_HEADER + length) {
+                        // wait for more data
+                        log(string.Format("Waiting for more data, expected {1}, got {0}", SIZE_HEADER + length, m_rxOffset));
+                        return;
+                    }
+
+                    // full msg in m_rx, evt or rsp ?
+                    byte[] evtRspBuffer = new byte[SIZE_HEADER + length];
+                    Array.Copy(m_rx, evtRspBuffer, evtRspBuffer.Length);
+                    // remove first event
+                    int excessBytes = m_rxOffset - evtRspBuffer.Length;
+                    for (int i = 0; i < excessBytes; i++) {
+                        m_rx[i] = m_rx[evtRspBuffer.Length + i];
+                    }
+                    m_rxOffset -= evtRspBuffer.Length;
+                    log(string.Format("m_rxOffset to {0}", m_rxOffset));
+                    evtRsp = parseEventResponse(new BgApiEventResponse(evtRspBuffer));
                 }
-
-                // read payload
-                int length = ((m_rx[0] & 0x7F) << 8) | m_rx[1];
-                log(string.Format("length: {0}", length));
-                if (m_rxOffset < SIZE_HEADER + length)
-                {
-                    // wait for more data
-                    log(string.Format("Waiting for more data, expected {1}, got {0}", SIZE_HEADER + length, m_rxOffset));
-                    return;
-                }
-
-                // full msg in m_rx, evt or rsp ?
-                byte[] evtRspBuffer = new byte[SIZE_HEADER + length];
-                Array.Copy(m_rx, evtRspBuffer, evtRspBuffer.Length);
-                // remove first event
-                int excessBytes = m_rxOffset - evtRspBuffer.Length;
-                for (int i = 0; i < excessBytes; i++)
-                {
-                    m_rx[i] = m_rx[evtRspBuffer.Length + i];
-                }
-                m_rxOffset -= evtRspBuffer.Length;
-                log(string.Format("m_rxOffset to {0}", m_rxOffset));
-
-                BgApiEventResponse evtRsp = parseEventResponse(new BgApiEventResponse(evtRspBuffer));
-                if(evtRsp.IsEvent)
-                {
+                if (evtRsp.IsEvent) {
                     HandleEvent((BgApiEvent)evtRsp);
                 }
-                else
-                {
+                else {
                     m_response = (BgApiResponse)evtRsp;
                     m_waitHandleResponse.Set();
                 }
