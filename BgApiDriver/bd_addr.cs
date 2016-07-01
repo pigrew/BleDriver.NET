@@ -38,9 +38,9 @@ namespace BgApiDriver
             string[] res = new string[Length];
             for (int i = 0; i < res.Length; i++)
             {
-                res[i] = Address[i].ToString("X2");
+                res[res.Length-1-i] = Address[i].ToString("X2");
             }
-            return string.Join(".", res);
+            return string.Join(":", res);
         } 
     }
 }
