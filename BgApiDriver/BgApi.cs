@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 using System;
-using System.IO.Ports;
+using RJCP.IO.Ports;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
@@ -34,18 +34,13 @@ namespace BgApiDriver
         /// <summary>
         /// The serial port we use to communicate with the BLE dongle.
         /// </summary>
-        private SerialPort m_serialPort;
+        private SerialPortStream m_serialPort;
 
         /// <summary>
         /// The port name that the BLE dongle is connected to, ex. "COM3".
         /// </summary>
         private string m_port;
-
-        /// <summary>
-        /// The stream connected to <code>m_serialPort</code> we use to read/write to/from the BLE dongle.
-        /// </summary>
-        private Stream m_stream;
-
+        
         /// <summary>
         /// Indicates whether the underlying serial port is open.
         /// </summary>
@@ -77,7 +72,7 @@ namespace BgApiDriver
         /// <summary>
         /// The event handler called when new data is received at the serial port.
         /// </summary>
-        private SerialDataReceivedEventHandler m_serialDataReceivedEventHandler;
+        private EventHandler<SerialDataReceivedEventArgs> m_serialDataReceivedEventHandler;
 
         private Queue<BgApiEvent> m_eventQueue = new Queue<BgApiEvent>();
         /// <summary>
@@ -206,9 +201,11 @@ namespace BgApiDriver
 
         private void doOpen()
         {
-            m_serialPort = new SerialPort(m_port, 256000, Parity.None, 8, StopBits.One);
+            m_serialPort = new SerialPortStream(m_port, 256000, 8, Parity.None, StopBits.One);
+            m_serialPort.Handshake = Handshake.DtrRts;
             // register for data received events
-            m_serialDataReceivedEventHandler = new SerialDataReceivedEventHandler(m_serialPort_DataReceived);
+            m_serialDataReceivedEventHandler = new EventHandler<SerialDataReceivedEventArgs>(
+                m_serialPort_DataReceived);
             m_serialPort.DataReceived += m_serialDataReceivedEventHandler;
             m_serialPort.ReadTimeout = EVENT_TIMEOUT_DEFAULT;
             bool deviceFound = false;
@@ -229,7 +226,6 @@ namespace BgApiDriver
             {
                 throw new BgApiException(string.Format("Cannot connect to device on port {0}", m_port));
             }
-            m_stream = m_serialPort.BaseStream;
             m_rxOffset = 0;
         }
 
@@ -243,7 +239,6 @@ namespace BgApiDriver
                 m_serialPort.DataReceived -= m_serialDataReceivedEventHandler;
                 try { m_serialPort.Close(); } catch { }
                 m_serialPort = null;
-                m_stream = null;
             }
         }
 
@@ -300,7 +295,7 @@ namespace BgApiDriver
                     log(string.Format("Received: {0}", m_serialPort.BytesToRead));
                     int availableBufferSpace = m_rx.Length - m_rxOffset;
                     int bytesToRead = Math.Min(availableBufferSpace, m_serialPort.BytesToRead);
-                    int read = m_stream.Read(m_rx, m_rxOffset, bytesToRead);
+                    int read = m_serialPort.Read(m_rx, m_rxOffset, bytesToRead);
                     m_rxOffset += read;
 
                     log(string.Format("m_rxOffset: {0}", m_rxOffset));
@@ -325,7 +320,7 @@ namespace BgApiDriver
                 log(string.Format("Received: {0}", m_serialPort.BytesToRead));
                 int availableBufferSpace = m_rx.Length - m_rxOffset;
                 int bytesToRead = Math.Min(availableBufferSpace, Math.Max(1,m_serialPort.BytesToRead)); // Read at least 1 byte, so it blocks
-                int read = m_stream.Read(m_rx, m_rxOffset, bytesToRead);
+                int read = m_serialPort.Read(m_rx, m_rxOffset, bytesToRead);
                 m_rxOffset += read;
 
                 log(string.Format("m_rxOffset: {0}", m_rxOffset));
@@ -386,8 +381,8 @@ namespace BgApiDriver
                     log("--> " + string.Join(" ", command.Data.Select(x => x.ToString("X2"))));
 
                     // write command
-                    m_stream.Write(command.Data, 0, command.Data.Length);
-                    m_stream.Flush();
+                    m_serialPort.Write(command.Data, 0, command.Data.Length);
+                    m_serialPort.Flush();
 
                     if (no_return) {
                         // do not expect a response for this command
