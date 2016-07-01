@@ -73,6 +73,12 @@ namespace BgApiDriver
         private Object m_receiveLock = new Object();
 
         /// <summary>
+        /// Send Lock, mostly to prevent multiple threads from simultaneously sending commands,
+        /// since the handling of the responses would be prone to threading issues.
+        /// </summary>
+        private Object m_sendLock = new Object();
+
+        /// <summary>
         /// The event handler called when new data is received at the serial port.
         /// </summary>
         private SerialDataReceivedEventHandler m_serialDataReceivedEventHandler;
@@ -250,8 +256,10 @@ namespace BgApiDriver
             // FIXME: implement
         }
 
-        private void receive(SerialDataReceivedEventArgs e)
-        {
+        // The DataReceived signal is sent from a ThreadPool. Thus, it could be sent a second time while
+        // this function is receiving, allowing two instances of receive() running simultaneously.
+        // Thus, locking is required. 
+        private void receive(SerialDataReceivedEventArgs e) {
             // Must loop because two responses could be contained within the same chunk of data
             while (m_serialPort.BytesToRead > 0 || m_rxOffset > 0) {
                 BgApiEventResponse evtRsp;
@@ -343,29 +351,29 @@ namespace BgApiDriver
             {
                 // ensure an open connection before attempting to send
                 Open();
-                // wait for response
-                m_waitHandleResponse.Reset();
-                m_response = null;
+                lock (m_sendLock) {
+                    // wait for response
+                    m_waitHandleResponse.Reset();
+                    m_response = null;
 
-                log("--> " + string.Join(" ", command.Data.Select(x => x.ToString("X2"))));
+                    log("--> " + string.Join(" ", command.Data.Select(x => x.ToString("X2"))));
 
-                // write command
-                m_stream.Write(command.Data, 0, command.Data.Length);
-                m_stream.Flush();
+                    // write command
+                    m_stream.Write(command.Data, 0, command.Data.Length);
+                    m_stream.Flush();
 
-                if (no_return)
-                {
-                    // do not expect a response for this command
-                    return null;
+                    if (no_return) {
+                        // do not expect a response for this command
+                        return null;
+                    }
+
+                    // what is the maximum wait time for a response
+                    if (!m_waitHandleResponse.WaitOne(5000)) {
+                        throw new BgApiException("Response timeout");
+                    }
+                    log("<-- " + string.Join(" ", m_response.Packet.Data.Select(x => x.ToString("X2"))));
+                    return m_response;
                 }
-
-                // what is the maximum wait time for a response
-                if (!m_waitHandleResponse.WaitOne(5000))
-                {
-                    throw new BgApiException("Response timeout");
-                }
-                log("<-- " + string.Join(" ", m_response.Packet.Data.Select(x => x.ToString("X2"))));
-                return m_response;
             }
             catch (Exception e)
             {
