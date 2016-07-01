@@ -57,24 +57,20 @@ namespace BgApiDriver
         public ble_msg_system_get_info_rsp_t Info { get; private set; }
 
         /// <summary>
-        /// Wait handle for a response from the ble device.
-        /// </summary>
-        protected ManualResetEvent m_waitHandleResponse;
-
-        /// <summary>
         /// Holds the response of a previously sent bgapi BgApiCommand.
         /// </summary>
         private BgApiResponse m_response;
-        
+
         /// <summary>
         /// Receive Lock, mostly to prevent multiple threads from simultaneously accessing
-        /// the read buffers.
+        /// the read buffers. The sendLock may not be locked within a receiveLock.
         /// </summary>
         private Object m_receiveLock = new Object();
 
         /// <summary>
         /// Send Lock, mostly to prevent multiple threads from simultaneously sending commands,
         /// since the handling of the responses would be prone to threading issues.
+        /// The sendLock may not be locked within a receiveLock.
         /// </summary>
         private Object m_sendLock = new Object();
 
@@ -83,6 +79,7 @@ namespace BgApiDriver
         /// </summary>
         private SerialDataReceivedEventHandler m_serialDataReceivedEventHandler;
 
+        private Queue<BgApiEvent> m_eventQueue = new Queue<BgApiEvent>();
         /// <summary>
         /// Assumes that the maximum message size in bytes that ever goes over the wire in both directions is less than this value.
         /// </summary>
@@ -101,7 +98,7 @@ namespace BgApiDriver
         /// <summary>
         /// Default wait time for the arrival of an event.
         /// </summary>
-        public const int EVENT_TIMEOUT_DEFAULT = 1000;
+        public const int EVENT_TIMEOUT_DEFAULT = 5000;
 
         /// <summary>
         /// Receive buffer.
@@ -184,7 +181,6 @@ namespace BgApiDriver
             m_port = port;
 
             m_rx = new byte[MAX_RECEIVE_MESSAGE];
-            m_waitHandleResponse = new ManualResetEvent(false);
         }
 
         /// <summary>
@@ -214,7 +210,7 @@ namespace BgApiDriver
             // register for data received events
             m_serialDataReceivedEventHandler = new SerialDataReceivedEventHandler(m_serialPort_DataReceived);
             m_serialPort.DataReceived += m_serialDataReceivedEventHandler;
-
+            m_serialPort.ReadTimeout = EVENT_TIMEOUT_DEFAULT;
             bool deviceFound = false;
             for (DateTime now = DateTime.Now; DateTime.Now - now < new TimeSpan(0, 0, 5); )
             {
@@ -255,6 +251,41 @@ namespace BgApiDriver
         {
             // FIXME: implement
         }
+        /// <summary>
+        /// Check if the buffer holds an entire event response. If it does, parse it and return it.
+        /// 
+        /// The receive lock MUST be taken out before calling this function.
+        /// </summary>
+        /// <returns>new event response, or null</returns>
+        private BgApiEventResponse ParseEventResponse() {
+            if (m_rxOffset < SIZE_HEADER) {
+                // wait for more data
+                log(string.Format("Waiting for header: {0}", m_rxOffset));
+                return null;
+            }
+
+            // read payload
+            int length = ((m_rx[0] & 0x7F) << 8) | m_rx[1];
+            log(string.Format("length: {0}", length));
+            if (m_rxOffset < SIZE_HEADER + length) {
+                // wait for more data
+                log(string.Format("Waiting for more data, expected {1}, got {0}", SIZE_HEADER + length, m_rxOffset));
+                return null;
+            }
+
+            // full msg in m_rx, evt or rsp ?
+            byte[] evtRspBuffer = new byte[SIZE_HEADER + length];
+            Array.Copy(m_rx, evtRspBuffer, evtRspBuffer.Length);
+            // remove first event
+            int excessBytes = m_rxOffset - evtRspBuffer.Length;
+            for (int i = 0; i < excessBytes; i++) {
+                m_rx[i] = m_rx[evtRspBuffer.Length + i];
+            }
+            m_rxOffset -= evtRspBuffer.Length;
+            log(string.Format("m_rxOffset to {0}", m_rxOffset));
+            return parseEventResponse(new BgApiEventResponse(evtRspBuffer));
+
+        }
 
         // The DataReceived signal is sent from a ThreadPool. Thus, it could be sent a second time while
         // this function is receiving, allowing two instances of receive() running simultaneously.
@@ -264,48 +295,47 @@ namespace BgApiDriver
             while (m_serialPort.BytesToRead > 0 || m_rxOffset > 0) {
                 BgApiEventResponse evtRsp;
                 lock (m_receiveLock) {
+                    // Sometimes this will be called AFTER the serial port is closed!
                     // Fill receive buffer with available data
                     log(string.Format("Received: {0}", m_serialPort.BytesToRead));
                     int availableBufferSpace = m_rx.Length - m_rxOffset;
                     int bytesToRead = Math.Min(availableBufferSpace, m_serialPort.BytesToRead);
                     int read = m_stream.Read(m_rx, m_rxOffset, bytesToRead);
                     m_rxOffset += read;
-                    
+
                     log(string.Format("m_rxOffset: {0}", m_rxOffset));
-                    if (m_rxOffset < SIZE_HEADER) {
-                        // wait for more data
-                        log(string.Format("Waiting for header: {0}", m_rxOffset));
+                    evtRsp = ParseEventResponse();
+                    if (evtRsp == null)
                         return;
-                    }
-
-                    // read payload
-                    int length = ((m_rx[0] & 0x7F) << 8) | m_rx[1];
-                    log(string.Format("length: {0}", length));
-                    if (m_rxOffset < SIZE_HEADER + length) {
-                        // wait for more data
-                        log(string.Format("Waiting for more data, expected {1}, got {0}", SIZE_HEADER + length, m_rxOffset));
-                        return;
-                    }
-
-                    // full msg in m_rx, evt or rsp ?
-                    byte[] evtRspBuffer = new byte[SIZE_HEADER + length];
-                    Array.Copy(m_rx, evtRspBuffer, evtRspBuffer.Length);
-                    // remove first event
-                    int excessBytes = m_rxOffset - evtRspBuffer.Length;
-                    for (int i = 0; i < excessBytes; i++) {
-                        m_rx[i] = m_rx[evtRspBuffer.Length + i];
-                    }
-                    m_rxOffset -= evtRspBuffer.Length;
-                    log(string.Format("m_rxOffset to {0}", m_rxOffset));
-                    evtRsp = parseEventResponse(new BgApiEventResponse(evtRspBuffer));
+                    if (!evtRsp.IsEvent)
+                        m_response = (BgApiResponse)evtRsp;
                 }
                 if (evtRsp.IsEvent) {
                     HandleEvent((BgApiEvent)evtRsp);
                 }
-                else {
-                    m_response = (BgApiResponse)evtRsp;
-                    m_waitHandleResponse.Set();
-                }
+            }
+        }
+        // m_receiveLock must be taken before calling this function.
+        // Also, events must be queued up until the command is returned.
+        // throws TimeoutException on timeout.
+        private BgApiResponse receiveBlockingUntilCommandResponse() {
+            while (true) {
+                BgApiEventResponse evtRsp;
+                // Fill receive buffer with available data
+                log(string.Format("Received: {0}", m_serialPort.BytesToRead));
+                int availableBufferSpace = m_rx.Length - m_rxOffset;
+                int bytesToRead = Math.Min(availableBufferSpace, Math.Max(1,m_serialPort.BytesToRead)); // Read at least 1 byte, so it blocks
+                int read = m_stream.Read(m_rx, m_rxOffset, bytesToRead);
+                m_rxOffset += read;
+
+                log(string.Format("m_rxOffset: {0}", m_rxOffset));
+                evtRsp = ParseEventResponse();
+                if(evtRsp == null)
+                    continue;
+                if (evtRsp.IsEvent)
+                    m_eventQueue.Enqueue((BgApiEvent)evtRsp);
+                else
+                    return (BgApiResponse)evtRsp;
             }
         }
 
@@ -345,15 +375,12 @@ namespace BgApiDriver
         /// <param name="command">The BgApiCommand to send.</param>
         /// <param name="no_return">True, iff the command has no response (ex. the reset command does not return a response).</param>
         /// <returns>The response from the bgapi device.</returns>
-        private BgApiResponse Send(BgApiCommand command, bool no_return)
-        {
-            try
-            {
+        private BgApiResponse Send(BgApiCommand command, bool no_return) {
+            try {
                 // ensure an open connection before attempting to send
                 Open();
                 lock (m_sendLock) {
                     // wait for response
-                    m_waitHandleResponse.Reset();
                     m_response = null;
 
                     log("--> " + string.Join(" ", command.Data.Select(x => x.ToString("X2"))));
@@ -366,22 +393,38 @@ namespace BgApiDriver
                         // do not expect a response for this command
                         return null;
                     }
-
-                    // what is the maximum wait time for a response
-                    if (!m_waitHandleResponse.WaitOne(5000)) {
-                        throw new BgApiException("Response timeout");
+                    lock (m_receiveLock) {
+                        if (m_response == null) {
+                            // what is the maximum wait time for a response
+                            try {
+                                m_response = receiveBlockingUntilCommandResponse();
+                            }
+                            catch (TimeoutException) {
+                                throw new BgApiException("Response timeout");
+                            }
+                        }
+                        log("<-- " + string.Join(" ", m_response.Packet.Data.Select(x => x.ToString("X2"))));
                     }
-                    log("<-- " + string.Join(" ", m_response.Packet.Data.Select(x => x.ToString("X2"))));
-                    return m_response;
                 }
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 log(e.Message);
                 // do not assume anything about the state of the ble device
                 // after an exception
                 Close();
                 throw e;
+            }
+            while (true) {
+                BgApiEvent evt;
+                lock (m_eventQueue) {
+                    if (m_eventQueue.Count == 0) {
+                        return m_response;
+                    }
+                    else {
+                        evt = m_eventQueue.Dequeue();
+                    }
+                }
+                HandleEvent(evt);
             }
         }
 
@@ -392,7 +435,7 @@ namespace BgApiDriver
         protected virtual void log(string msg)
         {
             Console.WriteLine(msg);
-            System.Diagnostics.Debug.Print(msg);
+           // System.Diagnostics.Debug.Print(msg);
         }
     }
 }
