@@ -32,7 +32,28 @@ namespace BgApiDriver
         {
             Address = new byte[Length];
         }
-
+        public static bool TryParse(string s, out bd_addr result) {
+            result = null;
+            if (s == null)
+                return false;
+            s = s.Trim();
+            string[] parts = s.Split(new char[] { ':' });
+            if (parts.Length != 6)
+                return false;
+            byte[] parsedBytes = new byte[6];
+            try {
+                for (int i = 0; i < 6; i++) {
+                    if (parts[i].Length < 1 || parts[i].Length > 2)
+                        return false;
+                    parsedBytes[5-i] = Convert.ToByte(parts[i], 16);
+                }
+            } catch (Exception) {
+                return false;
+            }
+            result = new bd_addr();
+            result.Address = parsedBytes;
+            return true;
+        }
         public override string ToString()
         {
             string[] res = new string[Length];
