@@ -406,9 +406,12 @@ namespace BgApiDriver {
     def dumpEnumsEnum(self, f):
         for cls in self.classes:
             for enum in cls.enums:
+                isFlag = False
+                if enum.name in ('attribute_status_flag','connstatus'):
+                     isFlag = True
                 f.write('''
-        public enum %(class)s_%(enum)s
-        {''' % { 'class' : cls.name, 'enum' : enum.name })
+        %(flags)spublic enum %(class)s_%(enum)s
+        {''' % {'flags' : (isFlag and '[Flags]\n        ' or ''),  'class' : cls.name, 'enum' : enum.name })
                 for value in enum.values:
                     f.write('''
             %(name)s = %(value)s,''' % { 'class' : cls.name, 'name' : value[0], 'value' : value[1] })

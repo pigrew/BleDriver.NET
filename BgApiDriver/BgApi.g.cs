@@ -206,12 +206,14 @@ namespace BgApiDriver {
             attribute_change_reason_write_request_user = 2,
         }
 
+        [Flags]
         public enum attributes_attribute_status_flag
         {
             attribute_status_flag_notify = 1,
             attribute_status_flag_indicate = 2,
         }
 
+        [Flags]
         public enum connection_connstatus
         {
             connected = 1,
