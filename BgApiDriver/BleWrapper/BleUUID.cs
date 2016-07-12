@@ -71,7 +71,7 @@ namespace BgApiDriver.BleWrapper {
                 res[i] = (word).ToString("x4");
             }
             if (res.Length == 8)
-                return res[7] + res[6] + "-" + res[5] + "-" + res[4] + "-" + res[3] + "_" + res[2] + res[1] + res[0];
+                return res[7] + res[6] + "-" + res[5] + "-" + res[4] + "-" + res[3] + "-" + res[2] + res[1] + res[0];
             return string.Join("::", res.Reverse());
         }
         public override bool Equals(object obj) {
@@ -94,6 +94,19 @@ namespace BgApiDriver.BleWrapper {
                 return false;
             for (int i = 0; i < data.Length; i++)
                 if (data[i] != other.data[i])
+                    return false;
+            return true;
+        }
+        public bool Equals(byte[] other) {
+            if ((other == null) &&
+                (data == null))
+                return true;
+            if (data == null || other == null)
+                return false;
+            if (data.Length != other.Length)
+                return false;
+            for (int i = 0; i < data.Length; i++)
+                if (data[i] != other[i])
                     return false;
             return true;
         }
