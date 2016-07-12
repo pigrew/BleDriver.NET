@@ -45,7 +45,11 @@
     <Compile Include="BgApi.g.cs" />
     <Compile Include="BgApiException.cs" />
     <Compile Include="BgApiPacket.cs" />
+    <Compile Include="BleWrapper\BleCharacteristic.cs" />
+    <Compile Include="BleWrapper\BleConnection.cs" />
+    <Compile Include="BleWrapper\BleDescriptor.cs" />
     <Compile Include="BleWrapper\BleGroup.cs" />
+    <Compile Include="BleWrapper\BleService.cs" />
     <Compile Include="BleWrapper\BleUUID.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
