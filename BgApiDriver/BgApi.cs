@@ -255,16 +255,16 @@ namespace BgApiDriver
         private BgApiEventResponse ParseEventResponse() {
             if (m_rxOffset < SIZE_HEADER) {
                 // wait for more data
-                log(string.Format("Waiting for header: {0}", m_rxOffset));
+                log(LogLevel.FLOWCONTROL, string.Format("Waiting for header: {0}", m_rxOffset));
                 return null;
             }
 
             // read payload
             int length = ((m_rx[0] & 0x7F) << 8) | m_rx[1];
-            log(string.Format("length: {0}", length));
+            log(LogLevel.FLOWCONTROL, string.Format("length: {0}", length));
             if (m_rxOffset < SIZE_HEADER + length) {
                 // wait for more data
-                log(string.Format("Waiting for more data, expected {1}, got {0}", SIZE_HEADER + length, m_rxOffset));
+                log(LogLevel.FLOWCONTROL, string.Format("Waiting for more data, expected {1}, got {0}", SIZE_HEADER + length, m_rxOffset));
                 return null;
             }
 
@@ -277,7 +277,7 @@ namespace BgApiDriver
                 m_rx[i] = m_rx[evtRspBuffer.Length + i];
             }
             m_rxOffset -= evtRspBuffer.Length;
-            log(string.Format("m_rxOffset to {0}", m_rxOffset));
+            log(LogLevel.FLOWCONTROL, string.Format("m_rxOffset to {0}", m_rxOffset));
             return parseEventResponse(new BgApiEventResponse(evtRspBuffer));
 
         }
@@ -292,13 +292,13 @@ namespace BgApiDriver
                 lock (m_receiveLock) {
                     // Sometimes this will be called AFTER the serial port is closed!
                     // Fill receive buffer with available data
-                    log(string.Format("Received: {0}", m_serialPort.BytesToRead));
+                    log(LogLevel.FLOWCONTROL, string.Format("Received: {0}", m_serialPort.BytesToRead));
                     int availableBufferSpace = m_rx.Length - m_rxOffset;
                     int bytesToRead = Math.Min(availableBufferSpace, m_serialPort.BytesToRead);
                     int read = m_serialPort.Read(m_rx, m_rxOffset, bytesToRead);
                     m_rxOffset += read;
 
-                    log(string.Format("m_rxOffset: {0}", m_rxOffset));
+                    log(LogLevel.FLOWCONTROL, string.Format("m_rxOffset: {0}", m_rxOffset));
                     evtRsp = ParseEventResponse();
                     if (evtRsp == null)
                         return;
@@ -310,6 +310,10 @@ namespace BgApiDriver
                 }
             }
         }
+        protected enum LogLevel {
+            FLOWCONTROL,
+            INFO
+        }
         // m_receiveLock must be taken before calling this function.
         // Also, events must be queued up until the command is returned.
         // throws TimeoutException on timeout.
@@ -317,13 +321,13 @@ namespace BgApiDriver
             while (true) {
                 BgApiEventResponse evtRsp;
                 // Fill receive buffer with available data
-                log(string.Format("Received: {0}", m_serialPort.BytesToRead));
+                log(LogLevel.FLOWCONTROL, string.Format("Received: {0}", m_serialPort.BytesToRead));
                 int availableBufferSpace = m_rx.Length - m_rxOffset;
                 int bytesToRead = Math.Min(availableBufferSpace, Math.Max(1,m_serialPort.BytesToRead)); // Read at least 1 byte, so it blocks
                 int read = m_serialPort.Read(m_rx, m_rxOffset, bytesToRead);
                 m_rxOffset += read;
 
-                log(string.Format("m_rxOffset: {0}", m_rxOffset));
+                log(LogLevel.FLOWCONTROL, string.Format("m_rxOffset: {0}", m_rxOffset));
                 evtRsp = ParseEventResponse();
                 if(evtRsp == null)
                     continue;
@@ -427,9 +431,22 @@ namespace BgApiDriver
         /// All logging goes through this method for easy overriding.
         /// </summary>
         /// <param name="msg">The message to log.</param>
-        protected virtual void log(string msg)
-        {
-            Console.WriteLine(msg);
+        protected virtual void log(string msg) {
+            log(LogLevel.INFO, msg);
+        }
+        /// <summary>
+        /// All logging goes through this method for easy overriding.
+        /// </summary>
+        /// <param name="level">Log Level.</param>
+        /// <param name="msg">The message to log.</param>
+        protected virtual void log(LogLevel level, string msg) {
+            switch (level) {
+                case LogLevel.FLOWCONTROL:
+                    break;
+                default:
+                    Console.WriteLine(msg);
+                    break;
+            }
            // System.Diagnostics.Debug.Print(msg);
         }
     }
