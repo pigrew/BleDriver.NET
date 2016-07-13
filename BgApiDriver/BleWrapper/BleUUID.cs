@@ -14,7 +14,9 @@ namespace BgApiDriver.BleWrapper {
         public static BleUUID ClientCharacteristicConfiguration =
             new BleUUID("0x2902");
         public BleUUID(byte[] data) {
-            this.data = data;
+            this.data = new byte[data.Length];
+            for (int i = 0; i < data.Length; i++)
+                this.data[i] = data[i];
         }
         /// <summary>
         // Can parse (MSB first):
