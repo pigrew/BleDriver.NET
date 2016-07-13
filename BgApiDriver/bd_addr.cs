@@ -32,6 +32,20 @@ namespace BgApiDriver
         {
             Address = new byte[Length];
         }
+        public override bool Equals(object obj) {
+            bd_addr other = obj as bd_addr;
+            if (other == null)
+                return false;
+            for (int i = 0; i < 6; i++)
+                if (other.Address[i] != Address[i])
+                    return false;
+            return true;
+        }
+        public override int GetHashCode() {
+            int x = BitConverter.ToInt32(Address, 0);
+            x = x ^ BitConverter.ToInt16(Address, 4);
+            return x;
+        }
         public static bool TryParse(string s, out bd_addr result) {
             result = null;
             if (s == null)
