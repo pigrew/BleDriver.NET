@@ -26,6 +26,7 @@ using System.Threading;
 using System.Collections.Generic;
 
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BgApiDriver
 {
@@ -413,18 +414,32 @@ namespace BgApiDriver
                 Close();
                 throw e;
             }
-            while (true) {
-                BgApiEvent evt;
-                lock (m_eventQueue) {
-                    if (m_eventQueue.Count == 0) {
-                        return m_response;
+            //
+            // Note that the event handler, delivering response data may be called BEFORE this function returns.
+            // 
+            // Also, this cannot be called from this thread, since that has a chance of creating a deadlock
+            // So, instead, have the EventThread hanle sending pending events
+
+            Task t = new Task(() =>
+            {
+                // It's possible that the above receive command left a response in the receive buffer, which will not have a future
+                // SerialDataReceived() event happen, so call the receive function, in order to clear out event responses, if any.
+                receive(null);
+                while (true) {
+                    BgApiEvent evt;
+                    lock (m_eventQueue) {
+                        if (m_eventQueue.Count == 0) {
+                            return;
+                        }
+                        else {
+                            evt = m_eventQueue.Dequeue();
+                        }
                     }
-                    else {
-                        evt = m_eventQueue.Dequeue();
-                    }
+                    HandleEvent(evt);
                 }
-                HandleEvent(evt);
-            }
+            });
+            t.Start();
+            return m_response;
         }
 
         /// <summary>
