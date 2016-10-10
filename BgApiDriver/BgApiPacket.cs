@@ -57,7 +57,7 @@ namespace BgApiDriver
         /// <summary>
         /// The result of a response or event.
         /// </summary>
-        public int result = (int)ble_error.ble_err_success;
+        public ble_error result = ble_error.ble_err_success;
     }
     public class BgApiEvent : BgApiEventResponse { }
     public class BgApiResponse : BgApiEventResponse { }

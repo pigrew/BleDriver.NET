@@ -139,7 +139,8 @@ class BgApiCommandEvent(object):
                                     s.%(name)s = %(isSigned)sbuffer[idx++];''' % { 'name' : p.name, 'isSigned' : (t.isSigned and '(sbyte)') or '' }
             elif t.numBytes == 2:
                 s += '''
-                                    s.%(name)s = buffer[idx+0] | (%(isSignedStart)sbuffer[idx+1]%(isSignedEnd)s << 8); idx+=2;''' % { 'name' : p.name,
+                                    s.%(name)s = %(castType)s (buffer[idx+0] | (%(isSignedStart)sbuffer[idx+1]%(isSignedEnd)s << 8)); idx+=2;''' % { 'name' : p.name,
+                                                                                                                                      'castType' : (p.name  == 'result' and '(ble_error)') or '',
                                                                                                                                       'isSignedStart' : (t.isSigned and '((sbyte)') or '',
                                                                                                                                       'isSignedEnd' : (t.isSigned and ')') or '' }
             elif t.numBytes == 4:
