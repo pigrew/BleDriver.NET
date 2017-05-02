@@ -243,8 +243,8 @@ namespace BgApiDriver
             }
         }
 
-        protected virtual void HandleEvent(BgApiEvent evt)
-        {
+        protected virtual void HandleEvent(BgApiEvent evt) {
+            log(LogLevel.INFO, "event: " + evt.GetType().ToString());
             // FIXME: implement
         }
         /// <summary>
