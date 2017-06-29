@@ -62,6 +62,23 @@ namespace BgApiDriver.BleWrapper {
             } else
                 return ToString();
         }
+        public byte[] ShortHex() {
+            if (data.Length == 2)
+                return data;
+            if (data.Length == 16 &&
+                data[11] == 0x00 && data[10] == 0x00 &&
+                data[9] == 0x10 && data[8] == 0x00 &&
+                data[7] == 0x80 && data[6] == 0x00 &&
+                data[5] == 0x00 && data[4] == 0x80 &&
+                data[3] == 0x5F && data[2] == 0x9B &&
+                data[1] == 0x34 && data[0] == 0xFB) {
+                if (data[15] == 0x00 && data[14] == 0x00)
+                    return new byte[] { data[12], data[13] };
+                else
+                    return new byte[] { data[12], data[13], data[14], data[15] };
+            }
+            return data;
+        }
         public override string ToString() {
             if (Length == 2)
                 return "0x" + data[1].ToString("X2") + data[0].ToString("X2");
@@ -92,10 +109,12 @@ namespace BgApiDriver.BleWrapper {
                 return true;
             if (data == null || other.data == null)
                 return false;
-            if (data.Length != other.data.Length)
+            byte[] shortA = ShortHex();
+            byte[] shortB = other.ShortHex();
+            if (shortA.Length != shortB.Length)
                 return false;
-            for (int i = 0; i < data.Length; i++)
-                if (data[i] != other.data[i])
+            for (int i = 0; i < shortA.Length; i++)
+                if (shortA[i] != shortB[i])
                     return false;
             return true;
         }
